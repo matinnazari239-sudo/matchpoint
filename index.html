@@ -173,5 +173,57 @@
   <footer>
     © MatchPoint — فوتبال، فراتر از ۹۰ دقیقه
   </footer>
+<section id="matches" dir="rtl" style="max-width:900px;margin:30px auto;padding:20px;color:#fff;font-family:Arial,sans-serif">
+  <h2>⚽ مسابقات لیگ برتر انگلیس</h2>
+  <p id="match-status">در حال دریافت مسابقات...</p>
+  <div id="match-list"></div>
+</section>
+
+<script>
+async function loadMatches() {
+  const status = document.getElementById("match-status");
+  const list = document.getElementById("match-list");
+
+  try {
+    const response = await fetch(
+      "/.netlify/functions/football?competition=PL"
+    );
+    if (!response.ok) throw new Error("دریافت اطلاعات ناموفق بود");
+
+    const data = await response.json();
+    const matches = (data.matches || []).slice(0, 10);
+
+    list.innerHTML = matches.map(match => {
+      const home = match.homeTeam.name;
+      const away = match.awayTeam.name;
+      const score = match.status === "FINISHED"
+        ? `${match.score.fullTime.home} - ${match.score.fullTime.away}`
+        : match.status === "IN_PLAY" || match.status === "PAUSED"
+          ? `${match.score.fullTime.home ?? 0} - ${match.score.fullTime.away ?? 0}`
+          : "در انتظار بازی";
+
+      const date = new Date(match.utcDate).toLocaleDateString("fa-IR");
+
+      return `
+        <article style="background:#14243b;border-radius:12px;padding:16px;margin:12px 0">
+          <div style="font-size:13px;color:#b8c9df">${date} | هفته ${match.matchday ?? "-"}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
+            <span>${home}</span>
+            <strong style="white-space:nowrap">${score}</strong>
+            <span>${away}</span>
+          </div>
+        </article>`;
+    }).join("");
+
+    status.textContent = matches.length
+      ? "آخرین اطلاعات دریافتی از منبع مسابقات"
+      : "فعلاً مسابقه‌ای برای نمایش پیدا نشد.";
+  } catch (error) {
+    status.textContent = "دریافت مسابقات ناموفق بود؛ لطفاً بعداً دوباره امتحان کن.";
+  }
+}
+
+loadMatches();
+</script>
 </body>
 </html>
