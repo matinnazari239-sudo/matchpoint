@@ -192,28 +192,68 @@ async function loadMatches() {
 
     const data = await response.json();
     const matches = data.matches || [];
+let activeFilter = "all";
 
-    list.innerHTML = matches.map(match => {
-      const home = match.homeTeam.name;
-      const away = match.awayTeam.name;
-      const score = match.status === "FINISHED"
-        ? `${match.score.fullTime.home} - ${match.score.fullTime.away}`
-        : match.status === "IN_PLAY" || match.status === "PAUSED"
-          ? `${match.score.fullTime.home ?? 0} - ${match.score.fullTime.away ?? 0}`
-          : "در انتظار بازی";
+function filterMatches(filter) {
+  activeFilter = filter;
+  renderMatches();
+}
 
-      const date = new Date(match.utcDate).toLocaleDateString("fa-IR");
+window.filterMatches = filterMatches;
 
-      return `
-        <article style="background:#14243b;border-radius:12px;padding:16px;margin:12px 0">
-          <div style="font-size:13px;color:#b8c9df">${date} | هفته ${match.matchday ?? "-"}</div>
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
-            <span>${home}</span>
-            <strong style="white-space:nowrap">${score}</strong>
-            <span>${away}</span>
-          </div>
-        </article>`;
-    }).join("");
+function renderMatches() {
+  const filteredMatches = matches.filter(match => {
+    if (activeFilter === "finished") return match.status === "FINISHED";
+    if (activeFilter === "upcoming") {
+      return ["SCHEDULED", "TIMED", "POSTPONED"].includes(match.status);
+    }
+    if (activeFilter === "live") {
+      return ["IN_PLAY", "PAUSED"].includes(match.status);
+    }
+    return true;
+  });
+
+  const results = document.getElementById("match-results");
+
+  results.innerHTML = filteredMatches.map(match => {
+    const home = match.homeTeam.name;
+    const away = match.awayTeam.name;
+
+    const score = match.status === "FINISHED" ||
+      match.status === "IN_PLAY" ||
+      match.status === "PAUSED"
+      ? `${match.score.fullTime.home ?? 0} - ${match.score.fullTime.away ?? 0}`
+      : "در انتظار بازی";
+
+    const date = new Date(match.utcDate).toLocaleDateString("fa-IR");
+
+    return `
+      <article style="background:#14243b;border-radius:12px;padding:16px;margin:12px 0;color:#fff">
+        <div style="font-size:13px;color:#b8c9df">${date} | هفته ${match.matchday ?? "-"}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
+          <span>${home}</span>
+          <strong style="white-space:nowrap">${score}</strong>
+          <span>${away}</span>
+        </div>
+      </article>`;
+  }).join("");
+
+  if (!filteredMatches.length) {
+    results.innerHTML = '<p style="color:#b8c9df">مسابقه‌ای در این بخش پیدا نشد.</p>';
+  }
+}
+
+list.innerHTML = `
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+    <button onclick="filterMatches('all')">همه مسابقات</button>
+    <button onclick="filterMatches('finished')">تمام‌شده</button>
+    <button onclick="filterMatches('upcoming')">آینده</button>
+    <button onclick="filterMatches('live')">زنده</button>
+  </div>
+  <div id="match-results"></div>
+`;
+
+renderMatches();
 
     status.textContent = matches.length
       ? "آخرین اطلاعات دریافتی از منبع مسابقات"
