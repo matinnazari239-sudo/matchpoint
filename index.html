@@ -200,7 +200,7 @@ async function loadMatches() {
 
   try {
     const response = await fetch(
-      "/.netlify/functions/football?competition=PL"
+      `/.netlify/functions/football?competition=${document.getElementById("league-select").value}&type=standings`
     );
     if (!response.ok) throw new Error("دریافت اطلاعات ناموفق بود");
 
