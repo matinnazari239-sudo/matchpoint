@@ -20,10 +20,14 @@ exports.handler = async (event) => {
   }
 
   try {
-    const response = await fetch(
-      `https://api.football-data.org/v4/competitions/${competition}/matches`,
-      { headers: { "X-Auth-Token": API_KEY } }
-    );
+    const type = event.queryStringParameters?.type || "matches";
+
+const endpoint = type === "standings" ? "standings" : "matches";
+
+const response = await fetch(
+  `https://api.football-data.org/v4/competitions/${competition}/${endpoint}`,
+  { headers: { "X-Auth-Token": API_KEY } }
+);
 
     const data = await response.json();
 
