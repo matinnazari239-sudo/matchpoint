@@ -191,7 +191,7 @@ async function loadMatches() {
     if (!response.ok) throw new Error("دریافت اطلاعات ناموفق بود");
 
     const data = await response.json();
-    const matches = (data.matches || []).slice(0, 10);
+    const matches = data.matches || [];
 
     list.innerHTML = matches.map(match => {
       const home = match.homeTeam.name;
