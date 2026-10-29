@@ -150,7 +150,15 @@
     </section>
 
     <section id="league">
-  <h2>🏆 جدول لیگ برتر انگلیس</h2>
+  <h2>🏆 جدول لیگ‌ها</h2>
+
+<select id="league-select" onchange="loadLeagueTable()">
+  <option value="PL">لیگ برتر انگلیس</option>
+  <option value="PD">لالیگا اسپانیا</option>
+  <option value="SA">سری آ ایتالیا</option>
+  <option value="BL1">بوندسلیگا آلمان</option>
+  <option value="FL1">لیگ یک فرانسه</option>
+</select>
   <p id="table-status">در حال دریافت جدول لیگ...</p>
   <div class="card" style="overflow-x:auto">
     <table>
