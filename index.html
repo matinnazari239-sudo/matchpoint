@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MatchPoint | فوتبال، فراتر از ۹۰ دقیقه</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7fb;
+      color: #17233c;
+    }
+    header {
+      background: #10233f;
+      color: white;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo { font-size: 24px; font-weight: bold; }
+    nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { color: white; text-decoration: none; }
+    .hero {
+      margin: 24px auto;
+      width: 90%;
+      padding: 38px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #10233f, #2563eb);
+      color: white;
+    }
+    .hero h1 { font-size: 32px; margin-top: 0; }
+    .hero p { line-height: 2; }
+    .container { width: 90%; margin: auto; }
+    h2 { margin-top: 32px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e3e8f0;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 3px 12px #10233f08;
+    }
+    .score {
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+      color: #2563eb;
+      margin: 14px 0;
+      direction: ltr;
+    }
+    .muted { color: #64748b; font-size: 13px; }
+    .tag {
+      display: inline-block;
+      color: #2563eb;
+      background: #eff6ff;
+      padding: 4px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      padding: 12px 8px;
+      text-align: right;
+      border-bottom: 1px solid #e5eaf2;
+    }
+    th { color: #64748b; }
+    footer {
+      margin-top: 35px;
+      background: #10233f;
+      color: white;
+      text-align: center;
+      padding: 22px;
+    }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 25px; }
+      nav { gap: 12px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">⚽ MatchPoint</div>
+    <nav>
+      <a href="#scores">نتایج</a>
+      <a href="#news">اخبار</a>
+      <a href="#league">جدول لیگ</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>فوتبال، فراتر از ۹۰ دقیقه</h1>
+    <p>آخرین نتایج، خبرهای مهم و جدول رقابت‌های فوتبال را در یک جا دنبال کن.</p>
+  </section>
+
+  <main class="container">
+    <section id="scores">
+      <h2>⚽ نتایج مسابقات</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">نمونه زنده</span>
+          <div class="score">2 - 1</div>
+          <p>تیم آبی ـ تیم قرمز</p>
+          <p class="muted">دقیقه ۶۷ · لیگ نمونه</p>
+        </article>
+        <article class="card">
+          <span class="tag">پایان بازی</span>
+          <div class="score">1 - 1</div>
+          <p>شمال FC ـ جنوب یونایتد</p>
+          <p class="muted">نتیجه آزمایشی</p>
+        </article>
+        <article class="card">
+          <span class="tag">بازی آینده</span>
+          <div class="score">20:30</div>
+          <p>ستاره‌ها ـ قهرمانان</p>
+          <p class="muted">زمان نمایشی</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="news">
+      <h2>📰 اخبار فوتبال</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">لیگ برتر</span>
+          <h3>آماده‌سازی تیم‌ها برای هفته جدید</h3>
+          <p class="muted">خبر نمونه برای طراحی اولیه سایت.</p>
+        </article>
+        <article class="card">
+          <span class="tag">نقل‌وانتقالات</span>
+          <h3>نگاهی به بازار نقل‌وانتقالات</h3>
+          <p class="muted">خبر نمونه برای طراحی اولیه سایت.</p>
+        </article>
+        <article class="card">
+          <span class="tag">تحلیل</span>
+          <h3>عوامل تعیین‌کننده در مسابقات فوتبال</h3>
+          <p class="muted">خبر نمونه برای طراحی اولیه سایت.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="league">
+      <h2>🏆 جدول لیگ نمونه</h2>
+      <div class="card" style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr><th>رتبه</th><th>تیم</th><th>بازی</th><th>تفاضل</th><th>امتیاز</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>۱</td><td>تیم آبی</td><td>۱۰</td><td>+۱۲</td><td>۲۵</td></tr>
+            <tr><td>۲</td><td>تیم قرمز</td><td>۱۰</td><td>+۸</td><td>۲۲</td></tr>
+            <tr><td>۳</td><td>شمال FC</td><td>۱۰</td><td>+۴</td><td>۱۹</td></tr>
+            <tr><td>۴</td><td>جنوب یونایتد</td><td>۱۰</td><td>۰</td><td>۱۵</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="muted" style="margin-top:20px">
+      توجه: نتایج، اخبار و جدول فعلی آزمایشی هستند و هنوز به اطلاعات زنده وصل نشده‌اند.
+    </p>
+  </main>
+
+  <footer>
+    © MatchPoint — فوتبال، فراتر از ۹۰ دقیقه
+  </footer>
+</body>
+</html>
