@@ -368,7 +368,7 @@ teams.forEach(team => {
         <td>${team.position}</td>
         <td style="display:flex;align-items:center;gap:10px">
   <img src="${team.team.crest}" alt="" width="24" height="24">
-  <span onclick="alert('کلیک شد')"
+  <span class="team-name" data-team-id="${team.team.id}"
       style="cursor:pointer;color:#60a5fa;text-decoration:underline">
   ${team.team.name}
 </span>
@@ -381,6 +381,11 @@ teams.forEach(team => {
         <td>${team.points}</td>
       </tr>
     `).join("");
+table.querySelectorAll(".team-name").forEach(element => {
+  element.addEventListener("click", function () {
+    showTeamDetails(this.dataset.teamId);
+  });
+});
 
     status.textContent = "جدول لیگ با موفقیت دریافت شد.";
   } catch (error) {
