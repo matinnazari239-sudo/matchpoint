@@ -384,6 +384,7 @@ teams.forEach(team => {
 table.querySelectorAll(".team-name").forEach(element => {
   element.addEventListener("click", function () {
     const teamId = this.dataset.teamId;
+alert("شناسه تیم: " + teamId);
     window.location.href = `team.html?id=${teamId}`;
   });
 });
