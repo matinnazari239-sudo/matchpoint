@@ -245,9 +245,17 @@ function renderMatches() {
       <article style="background:#14243b;border-radius:12px;padding:16px;margin:12px 0;color:#fff">
         <div style="font-size:13px;color:#b8c9df">${date} | هفته ${match.matchday ?? "-"}</div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
-          <span>${home}</span>
-          <strong style="white-space:nowrap">${score}</strong>
-          <span>${away}</span>
+          <div style="display:flex;align-items:center;gap:8px">
+  <img src="${match.homeTeam.crest}" width="28" height="28">
+  <span>${home}</span>
+</div>
+
+<strong style="white-space:nowrap">${score}</strong>
+
+<div style="display:flex;align-items:center;gap:8px">
+  <span>${away}</span>
+  <img src="${match.awayTeam.crest}" width="28" height="28">
+</div>
         </div>
       </article>`;
   }).join("");
