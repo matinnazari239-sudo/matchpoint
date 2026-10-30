@@ -199,7 +199,11 @@
 </section>
 
 <script>
-function showTeamDetails(team) {
+function showTeamDetails(teamId) {
+  const team = window.matchPointTeams[teamId];
+
+  if (!team) return;
+
   const details = document.getElementById("team-details");
   const info = document.getElementById("team-info");
 
@@ -353,15 +357,20 @@ loadMatches();
       throw new Error("جدول لیگ پیدا نشد");
     }
 
+window.matchPointTeams = window.matchPointTeams || {};
+
+teams.forEach(team => {
+  window.matchPointTeams[team.team.id] = team.team;
+});
     table.innerHTML = teams.map(team => `
       <tr>
         <td>${team.position}</td>
         <td style="display:flex;align-items:center;gap:10px">
   <img src="${team.team.crest}" alt="" width="24" height="24">
-  <span onclick='showTeamDetails(${JSON.stringify(team.team).replace(/'/g, "&#39;")})'
-        style="cursor:pointer;color:#60a5fa;text-decoration:underline">
-    ${team.team.name}
-  </span>
+  <span onclick="showTeamDetails(${team.team.id})"
+      style="cursor:pointer;color:#60a5fa;text-decoration:underline">
+  ${team.team.name}
+</span>
 </td>
         <td>${team.playedGames}</td>
         <td>${team.won}</td>
