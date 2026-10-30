@@ -237,6 +237,44 @@ alert("کلیک روی تیم اجرا شد! شناسه: " + teamId);
   details.style.display = "block";
   details.scrollIntoView({ behavior: "smooth" });
 }
+async function loadTopScorers() {
+  const league = document.getElementById("scorers-league").value;
+  const status = document.getElementById("scorers-status");
+  const list = document.getElementById("scorers-list");
+
+  status.textContent = "در حال دریافت گلزنان...";
+  list.innerHTML = "";
+
+  try {
+    const response = await fetch(
+      `/.netlify/functions/football?competition=${league}&type=scorers`
+    );
+
+    if (!response.ok) {
+      throw new Error("دریافت گلزنان ناموفق بود");
+    }
+
+    const data = await response.json();
+    const scorers = data.scorers || [];
+
+    if (!scorers.length) {
+      status.textContent = "اطلاعات گلزنان در دسترس نیست.";
+      return;
+    }
+
+    list.innerHTML = scorers.map((item, index) => `
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px;margin-top:10px;background:#183657;border-radius:10px">
+        <span>${index + 1}. ${item.player.name}</span>
+        <span>${item.team.name}</span>
+        <strong>${item.goals ?? 0} گل</strong>
+      </div>
+    `).join("");
+
+    status.textContent = "جدول گلزنان با موفقیت دریافت شد.";
+  } catch (error) {
+    status.textContent = "دریافت اطلاعات گلزنان با خطا مواجه شد.";
+  }
+}
 async function loadMatches() {
   const status = document.getElementById("match-status");
   const list = document.getElementById("match-list");
