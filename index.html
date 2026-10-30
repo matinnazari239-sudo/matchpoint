@@ -247,7 +247,9 @@ const time = new Date(match.utcDate).toLocaleTimeString("fa-IR", {
 
     return `
       <article style="background:#14243b;border-radius:12px;padding:16px;margin:12px 0;color:#fff">
-        <div style="font-size:13px;color:#b8c9df">${date} | هفته ${match.matchday ?? "-"}</div>
+        <div style="font-size:13px;color:#b8c9df">
+  ${date} | ساعت ${time} | هفته ${match.matchday ?? "-"}
+</div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
           <div style="display:flex;align-items:center;gap:8px">
   <img src="${match.homeTeam.crest}" width="28" height="28">
