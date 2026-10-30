@@ -240,6 +240,10 @@ function renderMatches() {
       : "در انتظار بازی";
 
     const date = new Date(match.utcDate).toLocaleDateString("fa-IR");
+const time = new Date(match.utcDate).toLocaleTimeString("fa-IR", {
+  hour: "2-digit",
+  minute: "2-digit"
+});
 
     return `
       <article style="background:#14243b;border-radius:12px;padding:16px;margin:12px 0;color:#fff">
