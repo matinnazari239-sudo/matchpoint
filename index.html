@@ -383,7 +383,8 @@ teams.forEach(team => {
     `).join("");
 table.querySelectorAll(".team-name").forEach(element => {
   element.addEventListener("click", function () {
-    showTeamDetails(this.dataset.teamId);
+    const teamId = this.dataset.teamId;
+    window.location.href = `team.html?id=${teamId}`;
   });
 });
 
