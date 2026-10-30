@@ -303,7 +303,10 @@ loadMatches();
     table.innerHTML = teams.map(team => `
       <tr>
         <td>${team.position}</td>
-        <td>${team.team.name}</td>
+        <td style="display:flex;align-items:center;gap:10px">
+  <img src="${team.team.crest}" alt="" width="24" height="24">
+  ${team.team.name}
+</td>
         <td>${team.playedGames}</td>
         <td>${team.won}</td>
         <td>${team.draw}</td>
