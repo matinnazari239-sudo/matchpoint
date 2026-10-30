@@ -22,7 +22,13 @@ exports.handler = async (event) => {
   try {
     const type = event.queryStringParameters?.type || "matches";
 
-const endpoint = type === "standings" ? "standings" : "matches";
+let endpoint = "matches";
+
+if (type === "standings") {
+  endpoint = "standings";
+} else if (type === "scorers") {
+  endpoint = "scorers";
+}
 
 const response = await fetch(
   `https://api.football-data.org/v4/competitions/${competition}/${endpoint}`,
