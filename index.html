@@ -193,6 +193,20 @@
   <p id="match-status">در حال دریافت مسابقات...</p>
   <div id="match-list"></div>
 </section>
+<section id="top-scorers" dir="rtl" style="max-width:900px;margin:30px auto;padding:20px;background:#10233f;color:white;border-radius:15px;font-family:Arial,sans-serif">
+  <h2>🏆 برترین گلزنان لیگ</h2>
+
+  <select id="scorers-league" onchange="loadTopScorers()">
+    <option value="PL">لیگ برتر انگلیس</option>
+    <option value="PD">لالیگا اسپانیا</option>
+    <option value="SA">سری آ ایتالیا</option>
+    <option value="BL1">بوندسلیگا آلمان</option>
+    <option value="FL1">لیگ یک فرانسه</option>
+  </select>
+
+  <p id="scorers-status">در حال دریافت اطلاعات...</p>
+  <div id="scorers-list"></div>
+</section>
 
 <section id="team-details" style="display:none;max-width:900px;margin:30px auto;padding:20px;background:#10233f;color:white;border-radius:15px">
   <div id="team-info"></div>
