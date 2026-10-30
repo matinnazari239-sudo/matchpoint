@@ -240,6 +240,16 @@ function renderMatches() {
       : "در انتظار بازی";
 
     const date = new Date(match.utcDate).toLocaleDateString("fa-IR");
+let statusText = "آینده";
+let statusColor = "#f59e0b";
+
+if (match.status === "FINISHED") {
+  statusText = "پایان‌یافته";
+  statusColor = "#3b82f6";
+} else if (["IN_PLAY", "PAUSED"].includes(match.status)) {
+  statusText = "زنده";
+  statusColor = "#22c55e";
+}
 const time = new Date(match.utcDate).toLocaleTimeString("fa-IR", {
   hour: "2-digit",
   minute: "2-digit"
@@ -247,8 +257,13 @@ const time = new Date(match.utcDate).toLocaleTimeString("fa-IR", {
 
     return `
       <article style="background:#14243b;border-radius:12px;padding:16px;margin:12px 0;color:#fff">
-        <div style="font-size:13px;color:#b8c9df">
-  ${date} | ساعت ${time} | هفته ${match.matchday ?? "-"}
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+  <span style="font-size:13px;color:#b8c9df">
+    ${date} | ساعت ${time} | هفته ${match.matchday ?? "-"}
+  </span>
+  <span style="background:${statusColor};color:white;padding:5px 10px;border-radius:20px;font-size:12px">
+    ${statusText}
+  </span>
 </div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
           <div style="display:flex;align-items:center;gap:8px">
