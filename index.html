@@ -194,7 +194,30 @@
   <div id="match-list"></div>
 </section>
 
+<section id="team-details" style="display:none;max-width:900px;margin:30px auto;padding:20px;background:#10233f;color:white;border-radius:15px">
+  <div id="team-info"></div>
+</section>
+
 <script>
+function showTeamDetails(team) {
+  const details = document.getElementById("team-details");
+  const info = document.getElementById("team-info");
+
+  info.innerHTML = `
+    <div style="display:flex;align-items:center;gap:15px">
+      <img src="${team.crest || ""}" width="65" height="65" alt="">
+      <h2>${team.name || "اطلاعات تیم"}</h2>
+    </div>
+    <p>نام تیم: ${team.name || "نامشخص"}</p>
+    <button onclick="document.getElementById('team-details').style.display='none'"
+      style="padding:10px 18px;border:0;border-radius:8px;cursor:pointer">
+      بستن اطلاعات
+    </button>
+  `;
+
+  details.style.display = "block";
+  details.scrollIntoView({ behavior: "smooth" });
+}
 async function loadMatches() {
   const status = document.getElementById("match-status");
   const list = document.getElementById("match-list");
@@ -335,7 +358,10 @@ loadMatches();
         <td>${team.position}</td>
         <td style="display:flex;align-items:center;gap:10px">
   <img src="${team.team.crest}" alt="" width="24" height="24">
-  ${team.team.name}
+  <span onclick='showTeamDetails(${JSON.stringify(team.team).replace(/'/g, "&#39;")})'
+        style="cursor:pointer;color:#60a5fa;text-decoration:underline">
+    ${team.team.name}
+  </span>
 </td>
         <td>${team.playedGames}</td>
         <td>${team.won}</td>
